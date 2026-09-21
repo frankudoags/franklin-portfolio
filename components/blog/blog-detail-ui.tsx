@@ -92,9 +92,19 @@ export function CopyLinkButton({ slug }: { slug: string }) {
 					setTimeout(() => setCopied(false), 2000);
 				} catch {}
 			}}
-			className='rounded-full border border-franklin-ink/15 px-4 py-2 text-sm font-bold transition-colors hover:bg-franklin-ink hover:text-franklin-lime dark:border-white/15 dark:hover:bg-franklin-lime dark:hover:text-white'
+			className='cursor-pointer inline-flex items-center gap-2 rounded-full border border-franklin-ink/15 px-4 py-2 text-sm font-bold transition-colors hover:bg-franklin-ink hover:text-franklin-lime dark:border-white/15 dark:hover:bg-franklin-lime dark:hover:text-white'
 		>
-			{copied ? 'Copied ✓' : 'Copy link'}
+			{copied ? (
+				<svg width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2.5' strokeLinecap='round' strokeLinejoin='round'>
+					<path d='M20 6 9 17l-5-5' />
+				</svg>
+			) : (
+				<svg width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'>
+					<rect x='9' y='9' width='13' height='13' rx='2' />
+					<path d='M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1' />
+				</svg>
+			)}
+			{copied ? 'Copied' : 'Copy link'}
 		</button>
 	);
 }

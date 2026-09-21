@@ -16,6 +16,8 @@ export interface BlogPost {
 	readTime: number;
 	socialImage?: string;
 	content: string;
+	series?: string;
+	part?: number;
 }
 
 export interface BlogFrontmatter {
@@ -23,4 +25,6 @@ export interface BlogFrontmatter {
 	author: string;
 	tags: string;
 	description: string;
+	series?: string;
+	part?: string;
 }

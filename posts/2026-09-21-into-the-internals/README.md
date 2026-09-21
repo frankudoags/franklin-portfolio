@@ -6,6 +6,9 @@ Tags: React, React Native, Engineering
 
 Description: I've shipped React and React Native for years. Now I want to understand them properly — and write down everything I learn about their internals.
 
+Series: React & React Native Internals
+Part: 1
+
 I've been building with React and React Native for over five years. Banking apps, healthcare platforms, skincare apps with AI features, open-source contributions. I know the APIs well. I know which hooks to reach for, how to structure a codebase, how to squeeze performance out of a laggy list.
 
 But lately I've been bothered by a gap: I use these tools every day, yet the machinery underneath them is mostly a blur. I want to fix that — and I want to write about it as I go.

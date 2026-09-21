@@ -55,6 +55,11 @@ function main() {
 		if (!/^Description:/m.test(head))
 			fail(folder, 'missing `Description:` line');
 
+		const partMatch = head.match(/^Part:\s*(.+)$/m);
+		if (partMatch && !/^\d+$/.test(partMatch[1].trim())) {
+			fail(folder, '`Part:` must be a plain number');
+		}
+
 		const social = path.join(POSTS_DIR, '..', 'public', 'blog', folder, 'social-media.png');
 		if (!fs.existsSync(social)) {
 			console.warn(`! ${folder}: no social-media.png — run bun run generate-social-image`);

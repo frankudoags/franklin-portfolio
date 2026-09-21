@@ -30,6 +30,22 @@ Regular markdown: headings, lists, links, quotes, images, code.
 - The first `# Title`, `Author:`, `Tags:` and `Description:` lines are the
   frontmatter — everything after is the article body.
 
+## Series (optional)
+
+To link posts with prev/next navigation, add after `Description:`:
+
+```md
+Series: React & React Native Internals
+Part: 3
+```
+
+- Posts sharing a `Series:` name get a "Part X of N" card with
+  Previous/Next links on their detail pages.
+- Order comes from `Part:` (ascending). Posts without one sort by
+  publish date after the numbered parts. Labels are always contiguous.
+- Dates stay purely informational — reordering a series is just
+  renumbering `Part:`.
+
 ## Social image
 
 After writing, generate the OG/card image:

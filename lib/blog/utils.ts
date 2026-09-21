@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import type { BlogFrontmatter, BlogPost } from './types';
 import { AUTHORS } from './authors';
-import { calculateReadTime } from './toc';
+import { calculateReadTime, generateId } from './toc';
 
 const PROJECT_ROOT = process.cwd();
 const POSTS_DIR = path.join(PROJECT_ROOT, 'posts');
@@ -24,6 +24,7 @@ export function parseFrontmatter(content: string): BlogFrontmatter {
 		author: '',
 		tags: '',
 		description: '',
+		series: '',
 	};
 	let inFrontmatter = false;
 	let consecutiveEmptyLines = 0;
@@ -53,6 +54,10 @@ export function parseFrontmatter(content: string): BlogFrontmatter {
 			frontmatter.tags = line.substring('Tags:'.length).trim();
 		else if (line.startsWith('Description:'))
 			frontmatter.description = line.substring('Description:'.length).trim();
+		else if (line.startsWith('Series:'))
+			frontmatter.series = line.substring('Series:'.length).trim();
+		else if (line.startsWith('Part:'))
+			frontmatter.part = line.substring('Part:'.length).trim();
 	}
 	return frontmatter;
 }
@@ -117,6 +122,8 @@ export function getBlogPostBySlug(slug: string): BlogPost | null {
 		if (line.startsWith('Author:')) continue;
 		if (line.startsWith('Tags:')) continue;
 		if (line.startsWith('Description:')) continue;
+		if (line.startsWith('Series:')) continue;
+		if (line.startsWith('Part:')) continue;
 		if (line === '') continue;
 		contentStart = i;
 		break;
@@ -139,6 +146,8 @@ export function getBlogPostBySlug(slug: string): BlogPost | null {
 		readTime: calculateReadTime(rawContent),
 		socialImage: `/blog/${slug}/social-media.png`,
 		content: rawContent,
+		series: frontmatter.series || undefined,
+		part: frontmatter.part ? parseInt(frontmatter.part, 10) || undefined : undefined,
 	};
 }
 
@@ -150,6 +159,81 @@ export function getAllBlogPosts(): BlogPost[] {
 		if (post) posts.push(post);
 	}
 	return posts;
+}
+
+export type SeriesNav = {
+	series: string;
+	seriesSlug: string;
+	part: number;
+	total: number;
+	prev: BlogPost | null; // older post in the series
+	next: BlogPost | null; // newer post in the series
+};
+
+export function seriesSlug(name: string): string {
+	return generateId(name);
+}
+
+/** All series with their posts ordered by Part (then date). */
+export function getAllSeries(): Array<{
+	name: string;
+	slug: string;
+	posts: BlogPost[];
+}> {
+	const byName = new Map<string, BlogPost[]>();
+	for (const post of getAllBlogPosts()) {
+		if (!post.series) continue;
+		const list = byName.get(post.series) ?? [];
+		list.push(post);
+		byName.set(post.series, list);
+	}
+	const sortParts = (a: BlogPost, b: BlogPost) => {
+		const ap = a.part ?? Number.POSITIVE_INFINITY;
+		const bp = b.part ?? Number.POSITIVE_INFINITY;
+		if (ap !== bp) return ap - bp;
+		return a.date < b.date ? -1 : 1;
+	};
+	return Array.from(byName.entries()).map(([name, posts]) => ({
+		name,
+		slug: seriesSlug(name),
+		posts: posts.sort(sortParts),
+	}));
+}
+
+export function getSeriesBySlug(slug: string) {
+	return getAllSeries().find((s) => s.slug === slug) ?? null;
+}
+
+/**
+ * Prev/next navigation within a post's series.
+ * Parts are ordered by explicit `Part:` frontmatter (ascending);
+ * posts without one sort by publish date after numbered parts.
+ * Labels are always contiguous (1..N) based on final position.
+ */
+export function getSeriesNav(slug: string): SeriesNav | null {
+	const post = getBlogPostBySlug(slug);
+	if (!post?.series) return null;
+
+	const seriesPosts = getAllBlogPosts()
+		.filter((p) => p.series === post.series)
+		.sort((a, b) => {
+			const ap = a.part ?? Number.POSITIVE_INFINITY;
+			const bp = b.part ?? Number.POSITIVE_INFINITY;
+			if (ap !== bp) return ap - bp;
+			return a.date < b.date ? -1 : 1;
+		});
+
+	const index = seriesPosts.findIndex((p) => p.slug === slug);
+	if (index === -1) return null;
+
+	return {
+		series: post.series,
+		seriesSlug: seriesSlug(post.series),
+		part: index + 1,
+		total: seriesPosts.length,
+		prev: index > 0 ? seriesPosts[index - 1] : null,
+		next: index < seriesPosts.length - 1 ? seriesPosts[index + 1] : null,
+	};
 }
 
 // Back-compat for old components (to be removed)

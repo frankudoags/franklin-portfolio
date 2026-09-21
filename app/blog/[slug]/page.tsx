@@ -5,6 +5,7 @@ import {
 	getAllBlogPosts,
 	getAllBlogSlugs,
 	getBlogPostBySlug,
+	getSeriesNav,
 } from 'lib/blog/utils';
 import { extractHeadings } from 'lib/blog/toc';
 import {
@@ -60,6 +61,7 @@ export default async function Blog({
 	if (!post) notFound();
 
 	const headings = extractHeadings(post.content);
+	const seriesNav = getSeriesNav(post.slug);
 	const readMore = getAllBlogPosts()
 		.filter((p) => p.slug !== post.slug)
 		.slice(0, 2);
@@ -153,6 +155,45 @@ export default async function Blog({
 						</div>
 					</div>
 				</div>
+
+				{/* series prev/next */}
+				{seriesNav && (
+					<div className='container mx-auto my-20 md: my-40 max-w-6xl'>
+
+						<div className='mt-4 flex items-center justify-between gap-6 pt-6'>
+							<div className='min-w-0 flex-1'>
+								{seriesNav.prev && (
+									<Link
+										href={`/blog/${seriesNav.prev.slug}`}
+										className='group block'
+									>
+										<span className='text-xs font-bold uppercase tracking-[0.16em] opacity-50'>
+											← Prev
+										</span>
+										<span className='font-display mt-1 block truncate text-lg font-medium group-hover:underline group-hover:underline-offset-4'>
+											{seriesNav.prev.title}
+										</span>
+									</Link>
+								)}
+							</div>
+							<div className='min-w-0 flex-1 text-right'>
+								{seriesNav.next && (
+									<Link
+										href={`/blog/${seriesNav.next.slug}`}
+										className='group block'
+									>
+										<span className='text-xs font-bold uppercase tracking-[0.16em] opacity-50'>
+											Next →
+										</span>
+										<span className='font-display mt-1 block truncate text-lg font-medium group-hover:underline group-hover:underline-offset-4'>
+											{seriesNav.next.title}
+										</span>
+									</Link>
+								)}
+							</div>
+						</div>
+					</div>
+				)}
 
 				{/* read more */}
 				{readMore.length > 0 && (
