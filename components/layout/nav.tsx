@@ -112,7 +112,6 @@ function MiniMenu({ isMobile = false }: { isMobile?: boolean }) {
 		setMenuOpen(false);
 	}, [pathname]);
 
-	const allLinks = [{ name: 'Home', href: '/' }, ...navItems];
 
 	return (
 		<div className='relative z-[50]'>
@@ -170,7 +169,7 @@ function MiniMenu({ isMobile = false }: { isMobile?: boolean }) {
 						</div>
 						<hr className='my-3 border-franklin-ink/10' />
 						<div className='space-y-1'>
-							{allLinks.map((link) => (
+							{navItems.map((link) => (
 								<Link
 									key={link.name}
 									href={link.href}

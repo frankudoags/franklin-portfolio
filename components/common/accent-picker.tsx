@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { cn } from 'lib/utils';
 
-const DEFAULT_ACCENT = '#0ea5e9';
+const DEFAULT_ACCENT = '#65a30d';
 const STORAGE_KEY = 'franklin-accent';
 
 const PRESETS = [
