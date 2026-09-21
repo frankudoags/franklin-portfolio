@@ -1,7 +1,7 @@
 import { baseUrl } from 'app/sitemap';
 import { metadata } from 'utils/metadata';
 import { StaticCard } from 'components/common/flip-card';
-import { Display } from 'components/ui/typography';
+import AnimatedHeading from 'components/common/animated-heading';
 import { projects } from 'lib/data';
 
 export function generateMetadata() {
@@ -15,20 +15,20 @@ export function generateMetadata() {
 export default function Projects() {
 	return (
 		<div>
-			<section className='bg-franklin-bone px-4 pb-8 pt-32 md:pt-40'>
-				<div className='container mx-auto max-w-4xl text-center'>
-					<Display>
+			<section className='bg-franklin-bone px-4 pb-12 pt-36 md:pt-44 lg:pb-16'>
+				<div className='container mx-auto flex max-w-3xl flex-col items-center justify-center text-center'>
+					<AnimatedHeading className='mb-6'>
 						Projects <span className='opacity-50'>& open source</span>
-					</Display>
-					<p className='mx-auto mt-5 max-w-2xl opacity-70'>
+					</AnimatedHeading>
+					<p className='max-w-xl text-sm opacity-80 md:text-base'>
 						Products, hackathons and Ethereum infrastructure — things
 						I&apos;ve built and contributed to.
 					</p>
 				</div>
 			</section>
 
-			<section className='bg-franklin-bone px-4 pb-20 lg:pb-28'>
-				<div className='container mx-auto grid gap-5 sm:grid-cols-2 lg:grid-cols-3'>
+			<section className='bg-franklin-bone px-4 pb-24 lg:pb-32'>
+				<div className='container mx-auto grid gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8'>
 					{projects.map((p, i) => (
 						<div key={p.name} data-reveal>
 							<StaticCard
@@ -47,15 +47,6 @@ export default function Projects() {
 					))}
 				</div>
 
-				<div className='mt-12 flex justify-center'>
-					<a
-						className='rounded-[10px] bg-franklin-ink px-8 py-4 text-sm font-semibold text-franklin-lime franklin-dark-shadow transition-transform hover:scale-[98%] dark:bg-franklin-lime dark:text-franklin-ink'
-						href='https://github.com/frankudoags'
-						target='_blank'
-					>
-						View all on GitHub →
-					</a>
-				</div>
 			</section>
 		</div>
 	);

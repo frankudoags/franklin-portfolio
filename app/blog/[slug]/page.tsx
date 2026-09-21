@@ -104,14 +104,14 @@ export default async function Blog({
 						{post.title}
 					</h1>
 					<div className='mt-8 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-sm font-semibold'>
-						<span className='grid size-8 place-items-center rounded-full bg-franklin-lime text-sm font-bold text-franklin-ink'>
+						<span className='grid size-8 place-items-center rounded-full bg-franklin-lime text-sm font-bold text-white'>
 							{post.author.name.charAt(0)}
 						</span>
 						<span className='opacity-90'>{post.author.name}</span>
 						<span className='opacity-40'>•</span>
 						<span className='opacity-70'>{post.formattedDate}</span>
 						<span className='opacity-40'>•</span>
-						<span className='rounded-full bg-franklin-lime px-3 py-1 text-xs font-bold text-franklin-ink'>
+						<span className='rounded-full bg-franklin-lime px-3 py-1 text-xs font-bold text-white'>
 							{post.readTime} min read
 						</span>
 					</div>

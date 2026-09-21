@@ -7,7 +7,7 @@ const buttonVariants = cva(
 	{
 		variants: {
 			variant: {
-				lime: 'bg-franklin-lime text-franklin-ink franklin-lime-shadow hover:bg-franklin-lime/90 py-3.5 px-6 rounded-[10px]',
+				lime: 'bg-franklin-lime text-white franklin-lime-shadow hover:bg-franklin-lime/90 py-3.5 px-6 rounded-[10px]',
 				ink: 'bg-franklin-ink text-franklin-bone franklin-dark-shadow hover:bg-black py-3.5 px-6 rounded-[10px] dark:bg-franklin-bone dark:text-franklin-ink',
 				outline:
 					'border-2 border-franklin-ink/15 bg-transparent text-franklin-ink hover:border-franklin-ink/40 hover:bg-franklin-ink/5 py-3.5 px-6 rounded-[10px] dark:border-franklin-bone/20 dark:text-franklin-bone dark:hover:bg-franklin-bone/10',

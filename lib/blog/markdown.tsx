@@ -66,7 +66,7 @@ export default function MarkdownContent({ content }: MarkdownContentProps) {
 						href={href}
 						target={href?.startsWith('http') ? '_blank' : undefined}
 						rel={href?.startsWith('http') ? 'noopener noreferrer' : undefined}
-						className='font-semibold text-franklin-pine underline decoration-franklin-lime decoration-2 underline-offset-4 hover:bg-franklin-lime hover:text-franklin-ink dark:text-franklin-lime dark:hover:text-franklin-ink'
+						className='font-semibold text-franklin-pine underline decoration-franklin-lime decoration-2 underline-offset-4 hover:bg-franklin-lime hover:text-white dark:text-franklin-lime dark:hover:text-white'
 					>
 						{children}
 					</a>

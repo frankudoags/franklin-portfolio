@@ -159,7 +159,7 @@ export function DeckCard({
 			}`}
 		>
 			{badge && (
-				<span className='inline-flex rounded-full bg-franklin-lime px-3 py-1 text-[11px] font-bold uppercase tracking-[0.14em] text-franklin-ink'>
+				<span className='inline-flex rounded-full bg-franklin-lime px-3 py-1 text-[11px] font-bold uppercase tracking-[0.14em] text-white'>
 					{badge}
 				</span>
 			)}

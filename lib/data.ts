@@ -153,33 +153,28 @@ export const projects: Project[] = [
 		url: 'https://tryvarsi.com',
 		description: 'Fancy marketing site with GSAP motion and custom design system.',
 	},
+];
+
+export const openSource: Array<{ name: string; url: string; note: string }> = [
 	{
-		name: 'Reth Ethereum Client',
-		tags: ['Rust', 'Ethereum', 'OSS'],
+		name: 'Reth',
 		url: 'https://github.com/paradigmxyz/reth',
-		description: 'Performant Rust Ethereum full node.',
-		isGithub: true,
+		note: 'Rust Ethereum full node',
 	},
 	{
-		name: 'Alloy Ethereum SDK',
-		tags: ['Rust', 'Ethereum', 'OSS'],
+		name: 'Alloy',
 		url: 'https://github.com/alloy-rs/alloy',
-		description: 'Rust toolkit for Ethereum/EVM development.',
-		isGithub: true,
+		note: 'Rust toolkit for Ethereum & EVM chains',
 	},
 	{
-		name: 'REVM — Rust EVM',
-		tags: ['Rust', 'Ethereum', 'OSS'],
+		name: 'REVM',
 		url: 'https://github.com/bluealloy/revm',
-		description: 'Rust Ethereum Virtual Machine contributions.',
-		isGithub: true,
+		note: 'Rust Ethereum Virtual Machine',
 	},
 	{
-		name: 'Viem TypeScript Ethereum',
-		tags: ['TypeScript', 'Ethereum', 'OSS'],
+		name: 'Viem',
 		url: 'https://github.com/wevm/viem',
-		description: 'TypeScript Ethereum library contributions.',
-		isGithub: true,
+		note: 'TypeScript interface for Ethereum',
 	},
 ];
 

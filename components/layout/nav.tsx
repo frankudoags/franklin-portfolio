@@ -88,7 +88,7 @@ export function Navbar() {
 							href='https://docs.google.com/document/d/1Nu_3lIwfVSbuj24vQn7sjXmoY0eO2rWrIy6XWCaqgq0/edit?tab=t.0#heading=h.gjdgxs'
 							target='_blank'
 							rel='noopener'
-							className='inline-flex h-12 items-center rounded-[10px] bg-franklin-lime px-6 text-sm font-semibold text-franklin-ink franklin-lime-shadow transition-transform hover:scale-[98%]'
+							className='inline-flex h-12 items-center rounded-[10px] bg-franklin-lime px-6 text-sm font-semibold text-white franklin-lime-shadow transition-transform hover:scale-[98%]'
 						>
 							Resume
 						</a>
@@ -189,7 +189,7 @@ function MiniMenu({ isMobile = false }: { isMobile?: boolean }) {
 							href='https://docs.google.com/document/d/1Nu_3lIwfVSbuj24vQn7sjXmoY0eO2rWrIy6XWCaqgq0/edit?tab=t.0#heading=h.gjdgxs'
 							target='_blank'
 							rel='noopener'
-							className='block rounded-[10px] bg-franklin-lime px-4 py-3 text-center text-sm font-bold text-franklin-ink'
+							className='block rounded-[10px] bg-franklin-lime px-4 py-3 text-center text-sm font-bold text-white'
 						>
 							Resume
 						</a>

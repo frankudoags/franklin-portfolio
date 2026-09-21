@@ -92,7 +92,7 @@ export function CopyLinkButton({ slug }: { slug: string }) {
 					setTimeout(() => setCopied(false), 2000);
 				} catch {}
 			}}
-			className='rounded-full border border-franklin-ink/15 px-4 py-2 text-sm font-bold transition-colors hover:bg-franklin-ink hover:text-franklin-lime dark:border-white/15 dark:hover:bg-franklin-lime dark:hover:text-franklin-ink'
+			className='rounded-full border border-franklin-ink/15 px-4 py-2 text-sm font-bold transition-colors hover:bg-franklin-ink hover:text-franklin-lime dark:border-white/15 dark:hover:bg-franklin-lime dark:hover:text-white'
 		>
 			{copied ? 'Copied ✓' : 'Copy link'}
 		</button>

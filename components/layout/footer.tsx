@@ -71,11 +71,8 @@ export default function Footer() {
 				<div className='flex flex-col items-start justify-between gap-8 border-b border-white/10 pb-14 lg:flex-row lg:items-end lg:pb-16'>
 					<div>
 						<p className='flex items-center gap-2.5 text-xs font-bold uppercase tracking-[0.2em] text-franklin-lime'>
-							<span className='relative flex size-2'>
-								<span className='absolute inline-flex h-full w-full animate-ping rounded-full bg-franklin-lime opacity-60' />
-								<span className='relative inline-flex size-2 rounded-full bg-franklin-lime' />
-							</span>
-							Open to collaborations
+							<span className='size-2 rounded-full bg-franklin-lime' />
+							Lagos, Nigeria{lagosTime ? ` — ${lagosTime} local` : ''}
 						</p>
 						<p className='font-display mt-5 max-w-xl text-4xl font-medium leading-[105%] tracking-tight md:text-6xl'>
 							Have an idea?
@@ -86,7 +83,7 @@ export default function Footer() {
 					<div className='flex flex-wrap gap-3'>
 						<a
 							href='mailto:frankudoags@gmail.com'
-							className='rounded-[10px] bg-franklin-lime px-7 py-4 text-sm font-bold text-franklin-ink transition-transform hover:scale-[98%]'
+							className='rounded-[10px] bg-franklin-lime px-7 py-4 text-sm font-bold text-white transition-transform hover:scale-[98%]'
 						>
 							frankudoags@gmail.com
 						</a>

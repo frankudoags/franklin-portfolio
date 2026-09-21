@@ -36,6 +36,68 @@ const LIGHT_LINE = '#E5E5E0';
 const W = 1280;
 const H = 720;
 
+const PORTRAIT_PATH = path.join(ROOT_DIR, 'public', 'images', 'me-square.png');
+let portraitCache: import('@napi-rs/canvas').Image | null = null;
+
+async function loadPortrait() {
+	if (portraitCache) return portraitCache;
+	if (!fs.existsSync(PORTRAIT_PATH)) return null;
+	try {
+		portraitCache = await loadImage(fs.readFileSync(PORTRAIT_PATH));
+		return portraitCache;
+	} catch {
+		return null;
+	}
+}
+
+function roundRectPath(
+	ctx: SKRSContext2D,
+	x: number,
+	y: number,
+	w: number,
+	h: number,
+	r: number
+) {
+	ctx.beginPath();
+	ctx.moveTo(x + r, y);
+	ctx.arcTo(x + w, y, x + w, y + h, r);
+	ctx.arcTo(x + w, y + h, x, y + h, r);
+	ctx.arcTo(x, y + h, x, y, r);
+	ctx.arcTo(x, y, x + w, y, r);
+	ctx.closePath();
+}
+
+/** Draws the portrait cover-cropped into a circle with an accent ring. */
+function drawPortraitCircle(
+	ctx: SKRSContext2D,
+	img: import('@napi-rs/canvas').Image,
+	cx: number,
+	cy: number,
+	r: number
+) {
+	// cover-crop: square source keeps the centered face intact
+	const side = Math.min(img.width, img.height);
+	const sx = (img.width - side) / 2;
+	const sy = (img.height - side) / 2;
+
+	const photoR = r - 4;
+	ctx.save();
+	ctx.beginPath();
+	ctx.arc(cx, cy, photoR, 0, Math.PI * 2);
+	ctx.clip();
+	ctx.drawImage(img, sx, sy, side, side, cx - photoR, cy - photoR, photoR * 2, photoR * 2);
+	ctx.restore();
+
+	// single accent ring flush with the photo edge — soft transparent alpha
+	ctx.strokeStyle = ACCENT;
+	ctx.globalAlpha = 0.16;
+	ctx.lineWidth = 14;
+	ctx.beginPath();
+	ctx.arc(cx, cy, r, 0, Math.PI * 2);
+	ctx.stroke();
+	ctx.globalAlpha = 1;
+}
+
 try {
 	if (fs.existsSync(FONTS_DIR)) GlobalFonts.loadFontsFromDir(FONTS_DIR);
 } catch {
@@ -119,6 +181,7 @@ async function generateForFolder(folderName: string): Promise<void> {
 	}
 
 	const info = extractPostInfo(readme, folderName);
+	const portrait = await loadPortrait();
 	const canvas = createCanvas(W, H);
 	const ctx = canvas.getContext('2d');
 
@@ -127,48 +190,29 @@ async function generateForFolder(folderName: string): Promise<void> {
 	ctx.fillRect(0, 0, W, H);
 
 	// accent top bar
-	ctx.fillStyle = ACCENT;
-	ctx.fillRect(0, 0, W, 14);
-
-	// faint corner mark
-	ctx.fillStyle = ACCENT_2;
-	ctx.globalAlpha = 0.12;
-	ctx.font = '700 420px Inter, sans-serif';
-	ctx.textAlign = 'right';
-	ctx.textBaseline = 'bottom';
-	ctx.fillText('F.', W - 40, H + 60);
-	ctx.globalAlpha = 1;
+	const hasPortrait = !!portrait;
+	const textMaxW = hasPortrait ? 730 : W - 180;
 
 	// eyebrow
 	ctx.textAlign = 'left';
 	ctx.textBaseline = 'top';
-	ctx.font = '700 30px Inter, sans-serif';
+	ctx.font = '700 28px Inter, sans-serif';
 	ctx.fillStyle = ACCENT;
-	const eyebrow = `${info.formattedDate}${info.author ? `  •  ${info.author}` : ''}`.toUpperCase();
-	ctx.fillText(eyebrow, 90, 120);
+	const eyebrow = `${info.formattedDate}${info.author ? `  •  ${info.author}` : ''}`;
+	ctx.fillText(eyebrow, 90, 110);
 
 	// title
-	ctx.font = '700 76px Inter, sans-serif';
+	ctx.font = '700 72px Inter, sans-serif';
 	ctx.fillStyle = INK;
-	const lines = wrapText(ctx, info.title || info.slug, W - 180);
-	lines.forEach((line, i) => ctx.fillText(line, 90, 190 + i * 92));
+	const lines = wrapText(ctx, info.title || info.slug, textMaxW);
+	lines.forEach((line, i) => ctx.fillText(line, 90, 175 + i * 88));
 
-	// bottom rule + brand
-	const brandY = H - 110;
-	ctx.fillStyle = LIGHT_LINE;
-	ctx.fillRect(90, brandY - 34, W - 180, 2);
-	ctx.font = '700 34px Inter, sans-serif';
-	ctx.fillStyle = INK;
-	ctx.fillText('Franklin Udoagwa', 90, brandY + 8);
-	ctx.font = '400 30px Inter, sans-serif';
-	ctx.fillStyle = GRAY;
-	ctx.fillText('— blog', 90 + ctx.measureText('Franklin Udoagwa').width + 90, brandY + 8);
+	// portrait panel
+	if (portrait) {
+		drawPortraitCircle(ctx, portrait, 1040, 350, 200);
+	}
 
-	// accent dot
-	ctx.fillStyle = ACCENT;
-	ctx.beginPath();
-	ctx.arc(W - 110, brandY + 22, 16, 0, Math.PI * 2);
-	ctx.fill();
+
 
 	if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
 	fs.writeFileSync(outPath, canvas.toBuffer('image/png'));
@@ -187,40 +231,34 @@ async function generateSiteOgImage(): Promise<void> {
 
 	const canvas = createCanvas(W, H);
 	const ctx = canvas.getContext('2d');
+	const portrait = await loadPortrait();
+	const hasPortrait = !!portrait;
+	const textMaxW = hasPortrait ? 730 : W - 180;
 
 	ctx.fillStyle = '#FFFFFF';
 	ctx.fillRect(0, 0, W, H);
-
-	ctx.fillStyle = ACCENT;
-	ctx.fillRect(0, 0, W, 14);
-
-	ctx.fillStyle = ACCENT_2;
-	ctx.globalAlpha = 0.12;
-	ctx.font = '700 420px Inter, sans-serif';
-	ctx.textAlign = 'right';
-	ctx.textBaseline = 'bottom';
-	ctx.fillText('F.', W - 40, H + 60);
-	ctx.globalAlpha = 1;
 
 	ctx.textAlign = 'left';
 	ctx.textBaseline = 'top';
 	ctx.font = '700 30px Inter, sans-serif';
 	ctx.fillStyle = ACCENT;
-	ctx.fillText('SENIOR ENGINEER — WEB • MOBILE • BACKEND • AI', 90, 150);
+	ctx.fillText('SENIOR ENGINEER — WEB • MOBILE • BACKEND • AI', 90, 140);
 
-	ctx.font = '700 110px Inter, sans-serif';
+	ctx.font = '700 104px Inter, sans-serif';
 	ctx.fillStyle = INK;
-	ctx.fillText('Franklin', 90, 220);
-	ctx.fillText('Udoagwa.', 90, 340);
+	const nameLines = wrapText(ctx, 'Franklin Udoagwa.', textMaxW, 2);
+	nameLines.forEach((line, i) => ctx.fillText(line, 90, 205 + i * 120));
 
 	ctx.font = '400 32px Inter, sans-serif';
 	ctx.fillStyle = GRAY;
-	ctx.fillText('Building useful software. Writing what I learn.', 90, 500);
+	const tagline = 'Building useful software. Writing what I learn.';
+	wrapText(ctx, tagline, textMaxW, 2).forEach((line, i) =>
+		ctx.fillText(line, 90, 205 + nameLines.length * 120 + 12 + i * 44)
+	);
 
-	ctx.fillStyle = ACCENT;
-	ctx.beginPath();
-	ctx.arc(W - 110, H - 88, 16, 0, Math.PI * 2);
-	ctx.fill();
+	if (portrait) {
+		drawPortraitCircle(ctx, portrait, 1040, 350, 200);
+	}
 
 	const dir = path.dirname(outPath);
 	if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });

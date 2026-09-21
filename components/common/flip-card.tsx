@@ -69,7 +69,7 @@ export default function FlipCard({
 					<div className='absolute inset-0 rounded-[24px] bg-gradient-to-b from-transparent via-transparent to-black/55' />
 					<div className='relative z-[1] w-full p-5'>
 						{data.badge && (
-							<span className='mb-2 inline-flex rounded-full bg-franklin-lime px-3 py-1 text-[11px] font-bold uppercase tracking-[0.14em] text-franklin-ink'>
+							<span className='mb-2 inline-flex rounded-full bg-franklin-lime px-3 py-1 text-[11px] font-bold uppercase tracking-[0.14em] text-white'>
 								{data.badge}
 							</span>
 						)}
@@ -170,7 +170,7 @@ export function StaticCard({
 					))}
 				</div>
 				{data.badge && (
-					<span className='absolute left-4 top-3 rounded-full bg-franklin-lime px-3 py-1 text-[11px] font-bold uppercase tracking-widest text-franklin-ink'>
+					<span className='absolute left-4 top-3 rounded-full bg-franklin-lime px-3 py-1 text-[11px] font-bold uppercase tracking-widest text-white'>
 						{data.badge}
 					</span>
 				)}
@@ -207,7 +207,7 @@ export function StaticCard({
 								onKeyDown={(e) => {
 									if (e.key === 'Enter') window.open(l.href, '_blank', 'noopener');
 								}}
-								className='cursor-pointer rounded-full bg-franklin-ink px-3 py-1.5 text-[11px] font-bold text-franklin-lime transition-transform hover:scale-95 dark:bg-franklin-lime dark:text-franklin-ink'
+								className='cursor-pointer rounded-full bg-franklin-ink px-3 py-1.5 text-[11px] font-bold text-franklin-lime transition-transform hover:scale-95 dark:bg-franklin-lime dark:text-white'
 							>
 								{l.label} ↗
 							</span>

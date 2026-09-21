@@ -40,7 +40,7 @@ export default function IntroLoader() {
 						initial={{ opacity: 0, y: 24 }}
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ duration: 0.5, ease: 'easeOut' }}
-						className='grid size-16 place-items-center rounded-2xl bg-franklin-lime font-display text-3xl font-bold text-franklin-ink'
+						className='grid size-16 place-items-center rounded-2xl bg-franklin-lime font-display text-3xl font-bold text-white'
 					>
 						F
 					</motion.span>

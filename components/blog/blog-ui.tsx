@@ -37,7 +37,7 @@ export function CategoryFilter({
 				onClick={() => onChange(null)}
 				className={`rounded-full px-4 py-2 text-sm font-bold transition-all ${
 					active === null
-						? 'bg-franklin-ink text-franklin-lime dark:bg-franklin-lime dark:text-franklin-ink'
+						? 'bg-franklin-ink text-franklin-lime dark:bg-franklin-lime dark:text-white'
 						: 'border border-franklin-ink/15 bg-white hover:border-franklin-ink/40 dark:border-white/15 dark:bg-white/5'
 				}`}
 			>
@@ -49,7 +49,7 @@ export function CategoryFilter({
 					onClick={() => onChange(tag === active ? null : tag)}
 					className={`rounded-full px-4 py-2 text-sm font-bold transition-all ${
 						active === tag
-							? 'bg-franklin-ink text-franklin-lime dark:bg-franklin-lime dark:text-franklin-ink'
+							? 'bg-franklin-ink text-franklin-lime dark:bg-franklin-lime dark:text-white'
 							: 'border border-franklin-ink/15 bg-white hover:border-franklin-ink/40 dark:border-white/15 dark:bg-white/5'
 					}`}
 				>

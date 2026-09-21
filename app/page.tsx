@@ -24,26 +24,42 @@ export default function Page() {
 		<div>
 			{/* ============ HERO (100vh, light) ============ */}
 			<section className='dot-grid-light relative flex min-h-screen items-center overflow-hidden bg-franklin-bone'>
-				<main className='container relative mx-auto max-w-6xl px-4 py-28 text-center'>
-					
-					<AnimatedHeading className='mx-auto mt-8 text-6xl leading-[95%] md:text-8xl'>
-						Franklin <span className='text-franklin-lime'>Udoagwa.</span>
-					</AnimatedHeading>
-					<p className='mx-auto mt-8 max-w-xl text-lg opacity-70 md:text-xl'>
-						I build web and mobile products people love to use — React,
-						React Native, and AI features like chat, RAG and voice.
-					</p>
-					<div className='mt-10 flex flex-wrap items-center justify-center gap-3'>
-						<a href='/work'>
-							<Button variant='lime' className='px-8 py-4 text-base'>
-								View my work
-							</Button>
-						</a>
-						<a href='/contact'>
-							<Button variant='outline' className='px-8 py-4 text-base'>
-								Get in touch
-							</Button>
-						</a>
+				<main className='container relative mx-auto grid max-w-6xl items-center gap-12 px-4 py-28 md:grid-cols-2 lg:gap-16'>
+					<div className='text-center md:text-left'>
+						<AnimatedHeading className='text-6xl leading-[95%] md:text-7xl lg:text-8xl'>
+							Franklin <span className='text-franklin-lime'>Udoagwa.</span>
+						</AnimatedHeading>
+						<p className='mx-auto mt-8 max-w-xl text-lg opacity-70 md:mx-0 md:text-xl'>
+							I build web, mobile, and backend products people love to use
+							— React, React Native, Node.js, and AI features like chat,
+							RAG and voice.
+						</p>
+						<div className='mt-10 flex flex-wrap items-center justify-center gap-3 md:justify-start'>
+							<a href='/work'>
+								<Button variant='lime' className='px-8 py-4 text-base'>
+									View my work
+								</Button>
+							</a>
+							<a href='/contact'>
+								<Button variant='outline' className='px-8 py-4 text-base'>
+									Get in touch
+								</Button>
+							</a>
+						</div>
+					</div>
+					<div className='relative mx-auto w-full max-w-[420px]' data-reveal>
+						<div
+							aria-hidden
+							className='absolute -right-4 -top-4 h-full w-full rounded-[32px] bg-franklin-lime'
+						/>
+						{/* eslint-disable-next-line @next/next/no-img-element */}
+						<img
+							src='/images/me-hero.jpg'
+							alt='Franklin Udoagwa'
+							width={840}
+							height={1120}
+							className='relative aspect-[4/5] w-full rounded-[32px] border border-franklin-ink/10 object-cover object-top'
+						/>
 					</div>
 				</main>
 				<a
@@ -57,12 +73,14 @@ export default function Page() {
 			</section>
 
 			{/* ============ TICKER ============ */}
-			<div className='overflow-hidden bg-franklin-lime py-3.5 text-franklin-ink'>
+			<div className='overflow-hidden bg-franklin-lime py-3.5 text-white'>
 				<div className='flex w-max animate-marquee gap-10 pr-10'>
 					{[
 						'React',
 						'React Native',
+						'Node.js',
 						'TypeScript',
+						'Backend',
 						'AI SDK',
 						'RAG',
 						'Voice Agents',
@@ -70,7 +88,9 @@ export default function Page() {
 						'Open Source',
 						'React',
 						'React Native',
+						'Node.js',
 						'TypeScript',
+						'Backend',
 						'AI SDK',
 						'RAG',
 						'Voice Agents',
@@ -105,7 +125,7 @@ export default function Page() {
 								data-reveal
 								className='flex min-h-[440px] flex-col gap-6 rounded-[20px] border border-franklin-ink/10 bg-white p-8 transition-transform duration-300 hover:-translate-y-1'
 							>
-								<div className='w-fit rounded-lg bg-franklin-lime p-2.5 font-display text-lg font-bold text-franklin-ink'>
+								<div className='w-fit rounded-lg bg-franklin-lime p-2.5 font-display text-lg font-bold text-white'>
 									{String(i + 1).padStart(2, '0')}
 								</div>
 								<div className='space-y-4'>
@@ -225,7 +245,7 @@ export default function Page() {
 						Let&apos;s build <span className='opacity-50'>something people use.</span>
 					</Heading2>
 					<p className='mx-auto mt-6 max-w-xl opacity-70'>
-						Frontend, mobile, AI features or Ethereum infra — I like
+						Frontend, mobile, backend, AI features or Ethereum infra — I like
 						zero-to-one and making existing systems fast.
 					</p>
 					<div className='mt-10 flex flex-wrap items-center justify-center gap-3'>

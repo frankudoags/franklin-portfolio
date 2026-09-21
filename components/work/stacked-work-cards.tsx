@@ -65,7 +65,7 @@ function StackCard({
 						<span className='rounded-full bg-franklin-ink/5 px-3.5 py-1.5 text-xs font-bold uppercase tracking-[0.14em]'>
 							{w.period}
 						</span>
-						<span className='rounded-full bg-franklin-lime px-3.5 py-1.5 text-xs font-bold uppercase tracking-[0.14em] text-franklin-ink'>
+						<span className='rounded-full bg-franklin-lime px-3.5 py-1.5 text-xs font-bold uppercase tracking-[0.14em] text-white'>
 							{w.access}
 						</span>
 					</div>
@@ -108,7 +108,7 @@ function StackCard({
 									href={l.href}
 									target='_blank'
 									rel='noopener'
-									className='rounded-[10px] bg-franklin-lime px-5 py-3 text-[13px] font-bold text-franklin-ink transition-transform hover:scale-[98%]'
+									className='rounded-[10px] bg-franklin-lime px-5 py-3 text-[13px] font-bold text-white transition-transform hover:scale-[98%]'
 								>
 									{l.label} ↗
 								</a>
