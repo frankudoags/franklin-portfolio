@@ -35,12 +35,11 @@ export const metadata = {
 		'Franklin Udoagwa — Senior Frontend Engineer (React, React Native, TypeScript) building AI-powered web, mobile, backend and fintech experiences.',
 	icons: {
 		icon: [
-			{ url: '/favicon_io/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
-			{ url: '/favicon_io/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
-			{ url: '/favicon.ico', sizes: 'any' },
+			{ url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+			{ url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
 		],
-		apple: '/favicon_io/apple-touch-icon.png',
-		other: [{ rel: 'manifest', url: '/favicon_io/site.webmanifest' }],
+		apple: '/apple-touch-icon.png',
+		other: [{ rel: 'manifest', url: '/manifest.webmanifest' }],
 	},
 	openGraph: {
 		title: 'Franklin Udoagwa — Senior Frontend Engineer',

@@ -91,18 +91,6 @@ export const workExperience: WorkItem[] = [
 		access: 'Publicly available',
 		url: 'https://gethydra.io/',
 	},
-	{
-		project: 'Matchbox Dating App',
-		company: 'Matchbox',
-		period: 'Jul 2021 — Aug 2022',
-		techStack: ['React Native', 'TypeScript', 'Messaging'],
-		description:
-			'Cross-platform dating app — auth, user profiles, real-time messaging interfaces, matching flows and API integrations with reusable UI components and optimized navigation/rendering.',
-		role: 'Frontend Engineer — Core product features with backend + design, rapid iteration to production releases.',
-		impact: 'Shipped smooth, responsive mobile dating experience to production.',
-		access: 'Publicly available',
-		url: 'https://github.com/frankudoags',
-	},
 ];
 
 export type Project = {
