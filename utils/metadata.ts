@@ -13,11 +13,7 @@ export function metadata({
 	url: string;
 	image?: string;
 }) {
-	let ogImage = image
-		? image
-		: `${baseUrl}/og?title=${encodeURIComponent(
-				title
-		  )}&description=${encodeURIComponent(description)}`;
+	let ogImage = image ? image : `${baseUrl}/images/og-image.png`;
 
 	return {
 		title,

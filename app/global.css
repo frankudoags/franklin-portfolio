@@ -1,157 +1,220 @@
 @import "tailwindcss";
 
-::selection {
-  background-color: #000000;
-  color: #ffffff;
-}
-
-@media (prefers-color-scheme: dark) {
-  ::selection {
-    background-color: #ffffff;
-    color: #000000;
-  }
-}
-
 :root {
-  --sh-class: #000000;
-  --sh-identifier: #000000;
-  --sh-sign: #000000;
-  --sh-string: #000000;
-  --sh-keyword: #000000;
-  --sh-comment: #666666;
-  --sh-jsxliterals: #000000;
-  --sh-property: #000000;
-  --sh-entity: #000000;
+  /* ============ THEME ============
+     Minimal system: white base + ink + grays + TWO accents.
+     To reskin the whole site, change only these two lines:
+       --franklin-lime  = ACCENT 1 (CTAs, badges, highlights)
+       --franklin-lilac = ACCENT 2 (secondary surfaces)
+  ================================= */
+  --franklin-ink: #131515;
+  --franklin-pine: #1c2422;
+  --franklin-pine-deep: #0c1110;
+  --franklin-lime: #0ea5e9;
+  --franklin-lilac: #2b44f0;
+  --franklin-peach: #ebebe7;
+  --franklin-bone: #ffffff;
+  --franklin-mist: #f4f4f1;
+
+  --radius: 0.625rem;
+
+  /* code highlight */
+  --sh-class: #1c2422;
+  --sh-identifier: #131515;
+  --sh-sign: #6b7280;
+  --sh-string: #0e7a4f;
+  --sh-keyword: #2b44f0;
+  --sh-comment: #9aa0a6;
+  --sh-jsxliterals: #1c2422;
+  --sh-property: #0b6eaf;
+  --sh-entity: #0b6eaf;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --sh-class: #ffffff;
-    --sh-identifier: #ffffff;
-    --sh-keyword: #ffffff;
-    --sh-string: #ffffff;
-    --sh-comment: #999999;
-  }
+.dark {
+  --sh-class: var(--franklin-lime);
+  --sh-identifier: #ffffff;
+  --sh-keyword: #8fa0ff;
+  --sh-string: #5fd99a;
+  --sh-comment: #7a8280;
+}
 
-  html {
-    color-scheme: dark;
-  }
+@theme inline {
+  --color-franklin-ink: var(--franklin-ink);
+  --color-franklin-pine: var(--franklin-pine);
+  --color-franklin-pine-deep: var(--franklin-pine-deep);
+  --color-franklin-lime: var(--franklin-lime);
+  --color-franklin-lilac: var(--franklin-lilac);
+  --color-franklin-peach: var(--franklin-peach);
+  --color-franklin-bone: var(--franklin-bone);
+  --color-franklin-mist: var(--franklin-mist);
+
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --animate-marquee: marquee 28s linear infinite;
+  --animate-marquee-slow: marquee 46s linear infinite;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }
 
 html {
   min-width: 360px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--franklin-pine) transparent;
 }
 
-.prose .anchor {
-  @apply absolute invisible no-underline;
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
 
+body {
+  background: var(--franklin-bone);
+  color: var(--franklin-ink);
+  font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.dark body {
+  background: var(--franklin-ink);
+  color: var(--franklin-bone);
+}
+
+::selection {
+  background: var(--franklin-lime);
+  color: var(--franklin-ink);
+}
+
+.font-display {
+  font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+}
+
+/* signature shadows (tactile buttons) */
+.franklin-lime-shadow {
+  box-shadow:
+    inset 0 -4px 0 0 rgba(10, 13, 18, 0.06),
+    inset 0 0 0 2px rgba(0, 0, 0, 0.08);
+}
+.franklin-dark-shadow {
+  box-shadow:
+    inset 0 -4px 0 0 rgba(0, 0, 0, 0.25),
+    inset 0 0 0 2px rgba(255, 255, 255, 0.1);
+}
+
+h1 .line-animate,
+.line-animate {
+  line-height: 100%;
+  letter-spacing: -0.04em;
+}
+
+.dot-grid-light {
+  background-image:
+    linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.85) 100%),
+    url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23000000' fill-opacity='0.05' fill-rule='evenodd'%3E%3Cpath d='M5 0h1L0 5v1H0V0h5z'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 30px 30px;
+}
+.dot-grid-dark {
+  background-image:
+    linear-gradient(to bottom, rgba(25, 28, 32, 1) 0%, rgba(25, 28, 32, 0.85) 100%),
+    url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'%3E%3Cpath d='M5 0h1L0 5v1H0V0h5z'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 30px 30px;
+}
+
+/* prose — keep MDX readable but on-brand */
+.prose .anchor {
+  position: absolute;
+  visibility: hidden;
+  text-decoration: none;
   margin-left: -1em;
   padding-right: 0.5em;
   width: 80%;
   max-width: 700px;
   cursor: pointer;
 }
-
-.anchor:hover {
-  @apply visible;
+.anchor:hover,
+.prose *:hover > .anchor {
+  visibility: visible;
 }
-
-.prose a {
-  @apply underline transition-all underline-offset-2;
-  text-decoration-color: inherit;
-  text-decoration-thickness: 1px;
-}
-
 .prose .anchor:after {
-  @apply text-black dark:text-white;
+  color: var(--franklin-pine);
   content: "#";
 }
-
-.prose *:hover > .anchor {
-  @apply visible;
+.prose a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  text-decoration-color: var(--franklin-pine);
+  transition: all 0.2s ease;
 }
-
+.prose a:hover {
+  background: var(--franklin-lime);
+  color: var(--franklin-ink);
+  text-decoration-color: transparent;
+}
 .prose pre {
-  @apply bg-white dark:bg-black overflow-x-auto py-2 px-3 text-sm;
+  overflow-x: auto;
+  padding: 0.75rem 0.9rem;
+  font-size: 0.875rem;
 }
-
 .prose code {
-  @apply px-1 py-0.5 bg-white dark:bg-black;
+  padding: 0.1rem 0.3rem;
 }
-
 .prose pre code {
-  @apply p-0 bg-transparent;
+  padding: 0;
+  background: transparent;
   line-height: 1.5;
 }
-
-.prose code span {
-  @apply font-medium;
-}
-
-.prose img {
-  @apply m-0;
-}
-
 .prose p {
-  @apply my-4 text-black dark:text-white;
+  margin: 1rem 0;
 }
-
 .prose h1 {
-  @apply text-4xl font-medium tracking-tight mt-6 mb-2 text-black dark:text-white;
+  font-size: 2.25rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin: 1.5rem 0 0.5rem;
 }
-
 .prose h2 {
-  @apply text-xl font-medium tracking-tight mt-6 mb-2 text-black dark:text-white;
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin: 1.5rem 0 0.5rem;
 }
-
-.prose h3 {
-  @apply text-xl font-medium tracking-tight mt-6 mb-2 text-black dark:text-white;
-}
-
+.prose h3,
 .prose h4 {
-  @apply text-lg font-medium tracking-tight mt-6 mb-2 text-black dark:text-white;
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin: 1.25rem 0 0.5rem;
 }
-
-.prose strong {
-  @apply font-medium text-black dark:text-white;
-}
-
 .prose ul {
-  @apply list-disc pl-6;
+  list-style: disc;
+  padding-left: 1.5rem;
 }
-
 .prose ol {
-  @apply list-decimal pl-6;
+  list-style: decimal;
+  padding-left: 1.5rem;
 }
-
 .prose > :first-child {
   margin-top: 1.25em !important;
   margin-bottom: 1.25em !important;
 }
-
 pre::-webkit-scrollbar {
   display: none;
 }
-
 pre {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
-
-input[type="text"],
-input[type="email"] {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-}
-
-table {
-  display: block;
-  max-width: fit-content;
-  overflow-x: auto;
-  white-space: nowrap;
-}
-
 .title {
   text-wrap: balance;
 }

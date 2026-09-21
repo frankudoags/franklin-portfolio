@@ -1,5 +1,7 @@
 import { baseUrl } from 'app/sitemap';
 import { metadata } from 'utils/metadata';
+import AnimatedHeading from 'components/common/animated-heading';
+import { skillCategories } from 'lib/data';
 
 export function generateMetadata() {
 	return metadata({
@@ -9,87 +11,52 @@ export function generateMetadata() {
 	});
 }
 
-type SkillCategory = {
-	title: string;
-	skills: string[];
-};
-
-const skillCategories: SkillCategory[] = [
-	{
-		title: 'Programming Languages',
-		skills: ['TypeScript', 'Rust', 'Python', 'Solidity', 'SQL', 'JavaScript'],
-	},
-	{
-		title: 'Frontend Development',
-		skills: [
-			'React.js',
-			'Next.js',
-			'React Native',
-			'Redux',
-			'Redux Toolkit',
-			'React Query',
-			'React Testing Library',
-			'Jest',
-			'CSS',
-			'SCSS',
-			'Tailwind CSS',
-			'Radix UI',
-			'Shadcn UI',
-			'Vue.js',
-			'Nuxt',
-			'Pinia',
-		],
-	},
-	{
-		title: 'Backend Development',
-		skills: ['Node.js', 'Express', 'NestJS', 'Axum', 'FastAPI', 'PostgreSQL', 'MySQL', 'MongoDB'],
-	},
-	{
-		title: 'DevOps & Infrastructure',
-		skills: ['Kubernetes', 'Linux', 'Git', 'AWS', 'Docker', 'Shell Scripting'],
-	},
-	{
-		title: 'Blockchain & Security',
-		skills: ['Smart Contract Development', 'Security Research', 'Vulnerability Assessment', 'Ethereum', 'Web3'],
-	},
-];
-
 export default function Skills() {
 	return (
-		<section>
-			<div className='p-6'>
-				<h1 className='mb-4 text-2xl font-semibold tracking-tighter text-black dark:text-white'>
-					Skills
-				</h1>
-
-				<p className='mb-5 text-black dark:text-white text-sm'>
-					Here is an overview of my technical skills and experience:
-				</p>
-
-				<div className='flex flex-col gap-5 mb-8'>
-					{skillCategories.map((category, index) => (
-						<div
-							key={index}
-							className='p-4 hover:text-gray-600 dark:hover:text-gray-400 transition-colors duration-200'
-						>
-							<h3 className='text-base font-medium mb-2 pb-2'>
-								{category.title}
-							</h3>
-
-							<div className='flex flex-wrap gap-2'>
-								{category.skills.map((skill, i) => (
-									<span
-										key={i}
-										className='px-2 py-1 text-xs font-medium text-black dark:text-white'
-									>
-										{skill}
-									</span>
-								))}
-							</div>
-						</div>
-					))}
+		<div>
+			<section className='bg-franklin-bone px-4 pb-12 pt-36 md:pt-44 lg:pb-16'>
+				<div className='container mx-auto flex max-w-3xl flex-col items-center justify-center text-center'>
+					<AnimatedHeading className='mb-6'>
+						Skills <span className='opacity-50'>& toolbox</span>
+					</AnimatedHeading>
+					<p className='max-w-xl text-sm opacity-80 md:text-base'>
+						What I reach for — from product UI to AI features to
+						infrastructure.
+					</p>
 				</div>
-			</div>
-		</section>
+			</section>
+
+			<section className='bg-franklin-bone px-4 pb-24 lg:pb-32'>
+				<div className='container mx-auto max-w-3xl'>
+					<div className='overflow-hidden rounded-[24px] border border-franklin-ink/10 bg-white'>
+						{skillCategories.map((category, i) => (
+							<div
+								key={category.title}
+								className={`px-7 py-8 md:px-9 ${i !== 0 ? 'border-t border-franklin-ink/10' : ''}`}
+							>
+								<div className='flex items-baseline justify-between gap-4'>
+									<h2 className='font-display text-xl font-medium tracking-tight md:text-2xl'>
+										{category.title}
+									</h2>
+									<p className='shrink-0 text-xs font-bold uppercase tracking-[0.18em] opacity-40'>
+										{category.skills.length}
+									</p>
+								</div>
+								<div className='mt-5 flex flex-wrap gap-2'>
+									{category.skills.map((skill) => (
+										<span
+											key={skill}
+											className='rounded-full bg-franklin-mist px-3.5 py-1.5 text-[13px] font-semibold'
+										>
+											{skill}
+										</span>
+									))}
+								</div>
+							</div>
+						))}
+					</div>
+				</div>
+			</section>
+		</div>
 	);
 }

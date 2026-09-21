@@ -1,17 +1,19 @@
-import { getBlogPosts } from 'app/blog/utils';
+import { getAllBlogPosts } from 'lib/blog/utils';
 
 export const baseUrl = 'https://frankudoags.xyz';
 
 export default async function sitemap() {
-	let blogs = getBlogPosts().map((post) => ({
+	const blogs = getAllBlogPosts().map((post) => ({
 		url: `${baseUrl}/blog/${post.slug}`,
-		lastModified: post.metadata.publishedAt,
+		lastModified: post.date,
 	}));
 
-	let routes = ['', '/blog'].map((route) => ({
-		url: `${baseUrl}${route}`,
-		lastModified: new Date().toISOString().split('T')[0],
-	}));
+	const routes = ['', '/blog', '/work', '/projects', '/skills', '/contact'].map(
+		(route) => ({
+			url: `${baseUrl}${route}`,
+			lastModified: new Date().toISOString().split('T')[0],
+		})
+	);
 
 	return [...routes, ...blogs];
 }
